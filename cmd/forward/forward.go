@@ -26,7 +26,7 @@ func run(cmd *cobra.Command, args []string) error {
 	}
 	defer cli.Close()
 
-	err = cli.forward(context.Background(), sessionId)
+	err = cli.Forward(context.Background(), sessionId)
 	if err != nil {
 		return fmt.Errorf("forward: %w", err)
 	}

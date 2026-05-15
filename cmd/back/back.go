@@ -26,7 +26,7 @@ func run(cmd *cobra.Command, args []string) error {
 	}
 	defer cli.Close()
 
-	err = cli.back(context.Background(), sessionId)
+	err = cli.Back(context.Background(), sessionId)
 	if err != nil {
 		return fmt.Errorf("back: %w", err)
 	}

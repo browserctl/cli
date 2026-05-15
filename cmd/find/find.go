@@ -12,21 +12,22 @@ import (
 )
 
 var cmd = &cobra.Command{
-	Use:   "find <sessionId>",
+	Use:   "find <sessionId> <selector>",
 	Short: "find operation",
-	Args:  cobra.ExactArgs(1),
+	Args:  cobra.ExactArgs(2),
 	RunE:  run,
 }
 
 func run(cmd *cobra.Command, args []string) error {
 	sessionId := args[0]
+	selector := args[1]
 	cli, err := client.New(root.SvcAddr, root.Secret)
 	if err != nil {
 		return err
 	}
 	defer cli.Close()
 
-	err = cli.find(context.Background(), sessionId)
+	err = cli.Find(context.Background(), sessionId, selector)
 	if err != nil {
 		return fmt.Errorf("find: %w", err)
 	}

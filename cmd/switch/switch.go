@@ -2,7 +2,6 @@ package switchcmd
 
 import (
 	"context"
-	"fmt"
 
 	"browserctl/cli/client"
 	"browserctl/cli/cmd/root"
@@ -12,15 +11,14 @@ import (
 )
 
 var cmd = &cobra.Command{
-	Use:   "switch <sessionId> <tabId>",
+	Use:   "switch <tabId>",
 	Short: "Switch to a different tab",
-	Args:  cobra.ExactArgs(2),
+	Args:  cobra.ExactArgs(1),
 	RunE:  run,
 }
 
 func run(cmd *cobra.Command, args []string) error {
-	sessionId := args[0]
-	tabId := args[1]
+	tabId := args[0]
 
 	cli, err := client.New(root.SvcAddr, root.Secret)
 	if err != nil {
@@ -30,11 +28,10 @@ func run(cmd *cobra.Command, args []string) error {
 
 	newSessionId, err := cli.Attach(context.Background(), tabId)
 	if err != nil {
-		return fmt.Errorf("switch: %w", err)
+		return err
 	}
 
-	out := output.Format(map[string]string{"sessionId": newSessionId}, root.Output)
-	cmd.Println(out)
+	cmd.Println(output.Format(map[string]string{"sessionId": newSessionId}, root.Output))
 	return nil
 }
 

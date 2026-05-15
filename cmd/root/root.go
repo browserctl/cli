@@ -9,19 +9,19 @@ import (
 )
 
 var cfgFile string
-var svcAddr string
-var secret   string
-var output   string
-var timeout  int
+var SvcAddr string
+var Secret   string
+var Output   string
+var Timeout  int
 
 func init() {
 	cobra.OnInitialize(initConfig)
 
-	rootCmd.PersistentFlags().StringVarP(&svcAddr, "svc", "s", "ws://localhost:9222", "browserctl svc address")
-	rootCmd.PersistentFlags().StringVar(&secret, "secret", "", "auth secret")
-	rootCmd.PersistentFlags().StringVarP(&output, "output", "o", "json", "output format: json, text, pretty")
-	rootCmd.PersistentFlags().IntVarP(&timeout, "timeout", "t", 30000, "timeout in milliseconds")
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is ./browserctl.yaml)")
+	RootCmd.PersistentFlags().StringVarP(&SvcAddr, "svc", "s", "ws://localhost:9222", "browserctl svc address")
+	RootCmd.PersistentFlags().StringVar(&Secret, "secret", "", "auth secret")
+	RootCmd.PersistentFlags().StringVarP(&Output, "output", "o", "json", "output format: json, text, pretty")
+	RootCmd.PersistentFlags().IntVarP(&Timeout, "timeout", "t", 30000, "timeout in milliseconds")
+	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is ./browserctl.yaml)")
 }
 
 func initConfig() {
@@ -36,13 +36,13 @@ func initConfig() {
 	viper.AutomaticEnv()
 }
 
-var rootCmd = &cobra.Command{
+var RootCmd = &cobra.Command{
 	Use:   "browserctl",
 	Short: "browserctl is a CLI for AI agents to control Chrome via CDP",
 }
 
 func Execute() {
-	if err := rootCmd.Execute(); err != nil {
+	if err := RootCmd.Execute(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}

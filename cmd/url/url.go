@@ -2,7 +2,6 @@ package url
 
 import (
 	"context"
-	"fmt"
 
 	"browserctl/cli/client"
 	"browserctl/cli/cmd/root"
@@ -26,12 +25,12 @@ func run(cmd *cobra.Command, args []string) error {
 	}
 	defer cli.Close()
 
-	err = cli.url(context.Background(), sessionId)
+	urlStr, err := cli.GetUrl(context.Background(), sessionId)
 	if err != nil {
-		return fmt.Errorf("url: %w", err)
+		return err
 	}
 
-	cmd.Println(output.Format(map[string]string{"ok": "url"}, root.Output))
+	cmd.Println(output.Format(urlStr, root.Output))
 	return nil
 }
 

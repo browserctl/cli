@@ -2,7 +2,6 @@ package cookies
 
 import (
 	"context"
-	"fmt"
 
 	"browserctl/cli/client"
 	"browserctl/cli/cmd/root"
@@ -26,12 +25,12 @@ func run(cmd *cobra.Command, args []string) error {
 	}
 	defer cli.Close()
 
-	err = cli.cookies(context.Background(), sessionId)
+	cookieStr, err := cli.Cookies(context.Background(), sessionId)
 	if err != nil {
-		return fmt.Errorf("cookies: %w", err)
+		return err
 	}
 
-	cmd.Println(output.Format(map[string]string{"ok": "cookies"}, root.Output))
+	cmd.Println(output.Format(cookieStr, root.Output))
 	return nil
 }
 

@@ -1,4 +1,6 @@
-package main
+// commands imports all subcommand packages to trigger their init() functions,
+// which register the commands with RootCmd.
+package cmd
 
 import (
 	_ "browserctl/cli/cmd/attach"
@@ -22,10 +24,4 @@ import (
 	_ "browserctl/cli/cmd/typeinput"
 	_ "browserctl/cli/cmd/url"
 	_ "browserctl/cli/cmd/version"
-
-	"browserctl/cli/cmd/root"
 )
-
-func main() {
-	root.Execute()
-}

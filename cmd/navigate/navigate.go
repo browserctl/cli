@@ -2,7 +2,6 @@ package navigate
 
 import (
 	"context"
-	"fmt"
 
 	"browserctl/cli/client"
 	"browserctl/cli/cmd/root"
@@ -28,13 +27,11 @@ func run(cmd *cobra.Command, args []string) error {
 	}
 	defer cli.Close()
 
-	result, err := cli.Navigate(context.Background(), sessionId, url)
-	if err != nil {
+	if err := cli.Navigate(context.Background(), sessionId, url); err != nil {
 		return err
 	}
 
-	out := output.Format(result, root.Output)
-	cmd.Println(out)
+	cmd.Println(output.Format(map[string]bool{"ok": true}, root.Output))
 	return nil
 }
 

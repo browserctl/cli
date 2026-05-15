@@ -2,7 +2,6 @@ package tabs
 
 import (
 	"context"
-	"encoding/json"
 
 	"browserctl/cli/client"
 	"browserctl/cli/cmd/root"
@@ -13,7 +12,7 @@ import (
 
 var listCmd = &cobra.Command{
 	Use:   "tabs",
-	Short: "List all http(s) tabs",
+	Short: "List open tabs",
 	RunE:  run,
 }
 
@@ -29,13 +28,10 @@ func run(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	out := output.Format(tabs, root.Output)
-	cmd.Println(out)
+	cmd.Println(output.Format(tabs, root.Output))
 	return nil
 }
 
 func init() {
 	root.RootCmd.AddCommand(listCmd)
 }
-
-var _ json.Marshaler = client.TargetInfo{}

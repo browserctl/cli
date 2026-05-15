@@ -26,7 +26,7 @@ func run(cmd *cobra.Command, args []string) error {
 	}
 	defer cli.Close()
 
-	err = cli.reload(context.Background(), sessionId)
+	err = cli.Reload(context.Background(), sessionId)
 	if err != nil {
 		return fmt.Errorf("reload: %w", err)
 	}

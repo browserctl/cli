@@ -2,8 +2,6 @@ package eval
 
 import (
 	"context"
-	"encoding/json"
-	"fmt"
 
 	"browserctl/cli/client"
 	"browserctl/cli/cmd/root"
@@ -13,7 +11,7 @@ import (
 )
 
 var cmd = &cobra.Command{
-	Use:   "eval <sessionId> <expression>",
+	Use:   "eval <sessionId> <expr>",
 	Short: "Evaluate JavaScript",
 	Args:  cobra.ExactArgs(2),
 	RunE:  run,
@@ -34,17 +32,10 @@ func run(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	out := output.Format(result, root.Output)
-	cmd.Println(out)
+	cmd.Println(output.Format(result, root.Output))
 	return nil
 }
 
 func init() {
 	root.RootCmd.AddCommand(cmd)
-}
-
-var _ json.Marshaler = Result{}
-
-type Result struct {
-	Result interface{} `json:"result"`
 }

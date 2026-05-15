@@ -2,7 +2,6 @@ package attach
 
 import (
 	"context"
-	"fmt"
 
 	"browserctl/cli/client"
 	"browserctl/cli/cmd/root"
