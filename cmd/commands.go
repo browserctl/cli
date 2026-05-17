@@ -14,6 +14,7 @@ import (
 	_ "browserctl/cli/cmd/forward"
 	_ "browserctl/cli/cmd/hover"
 	_ "browserctl/cli/cmd/html"
+	_ "browserctl/cli/cmd/launch"
 	_ "browserctl/cli/cmd/navigate"
 	_ "browserctl/cli/cmd/new"
 	_ "browserctl/cli/cmd/reload"

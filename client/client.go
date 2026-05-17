@@ -282,6 +282,15 @@ func (c *CdpClient) CloseTab(ctx context.Context, sessionId string) error {
 	return err
 }
 
+func (c *CdpClient) Launch(ctx context.Context, extPath string) error {
+	params := map[string]interface{}{}
+	if extPath != "" {
+		params["extPath"] = extPath
+	}
+	_, err := c.Send(ctx, "Browser.launch", "", params)
+	return err
+}
+
 func (c *CdpClient) NewTab(ctx context.Context, url string) (string, error) {
 	params := map[string]interface{}{"url": url}
 	result, err := c.Send(ctx, "Target.createTarget", "", params)
