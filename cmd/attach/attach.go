@@ -10,8 +10,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var tabId string
-
 var cmd = &cobra.Command{
 	Use:   "attach <tabId>",
 	Short: "Attach to a tab and get sessionId",
@@ -25,7 +23,7 @@ func run(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	defer cli.Close()
+	defer cli.Close() //nolint: errcheck
 
 	sessionId, err := cli.Attach(context.Background(), tabId)
 	if err != nil {

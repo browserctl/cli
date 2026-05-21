@@ -32,7 +32,7 @@ func run(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	defer cli.Close()
+	defer cli.Close() //nolint: errcheck
 
 	data, err := cli.Screenshot(context.Background(), sessionId)
 	if err != nil {
@@ -47,7 +47,7 @@ func run(cmd *cobra.Command, args []string) error {
 	}
 
 	if path == "" {
-		os.Stdout.Write(raw)
+		os.Stdout.Write(raw) //nolint: errcheck
 	} else {
 		if err := os.WriteFile(path, raw, 0644); err != nil {
 			return fmt.Errorf("write file: %w", err)

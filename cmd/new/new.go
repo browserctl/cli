@@ -11,8 +11,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var url string
-
 var cmd = &cobra.Command{
 	Use:   "new [url]",
 	Short: "Open a new tab, optionally navigate to URL",
@@ -30,7 +28,7 @@ func run(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	defer cli.Close()
+	defer cli.Close() //nolint: errcheck
 
 	tabId, err := cli.NewTab(context.Background(), targetURL)
 	if err != nil {

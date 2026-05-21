@@ -26,7 +26,7 @@ func run(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	defer cli.Close()
+	defer cli.Close() //nolint: errcheck
 
 	err = cli.Scroll(context.Background(), sessionId, px)
 	if err != nil {
