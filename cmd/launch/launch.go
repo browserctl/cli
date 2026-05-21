@@ -22,7 +22,7 @@ var launchCmd = &cobra.Command{
 		if err != nil {
 			return fmt.Errorf("connect: %w", err)
 		}
-		defer c.Close()
+		defer c.Close() //nolint: errcheck
 
 		err = c.Launch(context.Background(), extPath)
 		if err != nil {
